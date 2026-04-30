@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Login</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/icons.js"></script>
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            background-color: var(--light-orange);
+        }
+
+        .auth-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            margin-bottom: 20px;
+            color: var(--primary-orange);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.2);
+        }
+
+        .auth-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .auth-footer a {
+            color: var(--primary-orange);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    VM Traders
+                </a>
+                <div><a href="index.html"><i class="fa-solid fa-arrow-left"></i><span>Back to home</span></a></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="auth-container">
+        <div class="auth-card">
+            <h2>Welcome Back</h2>
+            <p style="margin-bottom: 30px; color: var(--text-light);">Login to manage your orders</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phoneNumber" class="form-control" placeholder="10-digit mobile number"
+                        required pattern="[0-9]{10}">
+                </div>
+
+                <div class="form-group">
+                    <label>Login Method</label>
+                    <select id="loginMethod" class="form-control">
+                        <option value="password">Password</option>
+                        <option value="otp">OTP Verification</option>
+                    </select>
+                </div>
+
+                <div id="passwordArea" class="form-group">
+                    <label>Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="••••••••">
+                        <span class="password-toggle-icon">
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="otpArea" class="form-group" style="display: none;">
+                    <label>OTP Code</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="otpCode" class="form-control" placeholder="6-digit OTP" maxlength="6">
+                        <button type="button" id="sendOtpBtn" class="btn btn-outline"
+                            style="white-space: nowrap; padding: 10px 15px; font-size: 0.9rem;">Send OTP</button>
+                    </div>
+                    <small id="otpHint" style="display: none; color: var(--primary-orange); margin-top: 5px;">Mock OTP:
+                        123456</small>
+                </div>
+
+                <div class="form-group"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 25px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="rememberMe" style="width: 16px; height: 16px; cursor: pointer;">
+                        <label for="rememberMe"
+                            style="margin-bottom: 0; cursor: pointer; font-size: 0.9rem; font-weight: 400;">Remember
+                            Me</label>
+                    </div>
+                    <a href="reset-password.html"
+                        style="font-size: 0.9rem; color: var(--primary-orange); font-weight: 500; text-decoration: none;">Forgot
+                        Password?</a>
+                </div>
+                <button type="submit" id="loginBtn" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/background.js"></script>
+    
+</body>
+
+</html>
+
+

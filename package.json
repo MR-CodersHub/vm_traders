@@ -1,0 +1,14 @@
+{
+  "name": "e-commerce-site",
+  "version": "1.0.0",
+  "description": "VM Traders E-commerce Site",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve",
+    "dev": "serve",
+    "serve": "npx serve"
+  },
+  "dependencies": {
+    "serve": "^14.2.6"
+  }
+}

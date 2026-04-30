@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Dashboard Overview</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/css/admin.css">
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/icons.js"></script>
+</head>
+
+<body class="dashboard-layout admin-dashboard">
+    <canvas id="bg-canvas"></canvas>
+    
+    <div class="page-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="logo-text">
+                    <i class="fa-solid fa-bolt"></i> VM Traders
+                </a>
+            </div>
+
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-profile">
+                    <div class="sidebar-user-avatar">A</div>
+                    <div class="sidebar-user-details">
+                        <p class="sidebar-user-name">Admin User</p>
+                        <p class="sidebar-user-role">Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="admin-products.html"><i class="fa-solid fa-box"></i> Products</a></li>
+                <li><a href="admin-customers.html"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="admin-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+                <li><a href="admin-settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li class="logout-item"><a href="#" data-auth="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0;">
+            <!-- Header -->
+            <header>
+                <div class="navbar">
+                    <div class="header-left">
+                        <div class="sidebar-toggle"><i class="fa-solid fa-bars"></i></div>
+                        <h1 class="page-title" style="font-size: 1.25rem; font-weight: 700; margin-left: 15px; color: var(--text-main);">Dashboard</h1>
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <a href="index.html" class="nav-icon" title="View Site"><i class="fa-solid fa-globe"></i></a>
+                        <div class="user-dropdown-container">
+                            <button class="user-dropdown-toggle"><i class="fa-solid fa-circle-user"></i></button>
+                            <div class="user-dropdown-menu">
+                                <a href="#" class="user-dropdown-item" data-auth="login">Login / Sign Up</a>
+                                <div class="user-dropdown-divider"></div>
+                                <a href="admin-dashboard.html" class="user-dropdown-item">Dashboard Overview</a>
+                                <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-container">
+                <div class="admin-header">
+                    <h2 id="welcome-message">Welcome back, Admin!</h2>
+                    <p>Here's what's happening with your store today.</p>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <div class="card-info">
+                            <span>Total Revenue</span>
+                            <h3 id="stat-revenue">₹0.00</h3>
+                        </div>
+                        <div class="card-icon" style="background: #ecfdf5; color: #10b981;"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+                    </div>
+                    <div class="admin-card">
+                        <div class="card-info">
+                            <span>Pending Orders</span>
+                            <h3 id="stat-pending">0</h3>
+                        </div>
+                        <div class="card-icon" style="background: #fff7ed; color: #f97316;"><i class="fa-solid fa-clock"></i></div>
+                    </div>
+                    <div class="admin-card">
+                        <div class="card-info">
+                            <span>Total Orders</span>
+                            <h3 id="stat-total-orders">0</h3>
+                        </div>
+                        <div class="card-icon" style="background: #eff6ff; color: #3b82f6;"><i class="fa-solid fa-bag-shopping"></i></div>
+                    </div>
+                    <div class="admin-card">
+                        <div class="card-info">
+                            <span>Completed Orders</span>
+                            <h3 id="stat-completed">0</h3>
+                        </div>
+                        <div class="card-icon" style="background: #fdf4ff; color: #a855f7;"><i class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity or Other widgets could go here -->
+                <div class="main-content" style="margin-top: 32px;">
+                    <h3 style="margin-top: 0; margin-bottom: 20px; font-weight: 700;">Recent Performance</h3>
+                    <p style="color: var(--text-muted);">Real-time monitoring of your store's health and customer engagement.</p>
+                    <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 2px dashed #e2e8f0; border-radius: 16px; color: #94a3b8;">
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-chart-area" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                            <p>Activity Chart Visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: auto; background: white;">
+                <p>&copy; 2026 VM Traders. Admin Control Panel. Crafted for excellence.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+    <script src="assets/js/admin-dashboard-core.js"></script>
+</body>
+
+</html>

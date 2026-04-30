@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Shopping Cart</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/icons.js"></script>
+    <style>
+        :root {
+            --cart-bg: #f8f9fa;
+        }
+
+        .cart-page-header {
+            padding: 80px 0 40px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Checkout Steps */
+        .checkout-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .step.active {
+            color: var(--primary-orange);
+        }
+
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .step.active .step-num {
+            background: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: #eee;
+        }
+
+        /* Cart Layout */
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cart-item-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .cart-item-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            background: var(--cart-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-img img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .cart-item-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            background: #f1f3f5;
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .cart-qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .cart-qty-btn:hover {
+            background: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .cart-qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cart-item-price {
+            text-align: right;
+            min-width: 120px;
+        }
+
+        .price-current {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .price-unit {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .remove-btn {
+            background: #fff5f5;
+            color: #ff6b6b;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            background: #ff6b6b;
+            color: var(--white);
+        }
+
+        /* Order Summary */
+        .order-summary-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--cart-bg);
+        }
+
+        .summary-details {
+            margin-bottom: 25px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .summary-line.total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--border-color);
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--primary-orange);
+            color: var(--white);
+            padding: 18px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(245, 124, 0, 0.2);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .checkout-btn:hover {
+            background: var(--dark-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(245, 124, 0, 0.3);
+        }
+
+        /* Empty Cart State */
+        .empty-cart-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-cart-icon {
+            font-size: 5rem;
+            color: var(--border-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .order-summary-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cart-item-card {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+                padding: 15px;
+            }
+            .cart-item-img {
+                width: 100%;
+                height: 180px;
+            }
+            .cart-item-price {
+                text-align: left;
+                margin-top: 10px;
+            }
+            .cart-page-header {
+                padding: 60px 0 30px;
+            }
+            .checkout-steps {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    VM Traders
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="grocery.html">Grocery</a></li>
+                    
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                </ul>
+                <div class="nav-icons">
+                        
+                    <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+                    
+                    <div class="user-dropdown-container">
+                        <button class="user-dropdown-toggle"><i class="fa-solid fa-user"></i></button>
+                        <div class="user-dropdown-menu">
+                            <a href="login.html" class="user-dropdown-item">Login / Sign Up</a>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="admin-dashboard.html" class="user-dropdown-item">Admin Dashboard</a>
+                            <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="cart-page-header reveal">
+        <div class="container text-center">
+            <h1 class="heading-primary">Your Shopping Bag</h1>
+            <p class="subtext">Review your items and proceed to secure checkout.</p>
+            
+            <div class="checkout-steps">
+                <div class="step active">
+                    <span class="step-num">1</span>
+                    <span>Cart</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span>Checkout</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span>Payment</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <section class="section-padding" style="background: var(--cart-bg);">
+        <div class="container">
+            <div class="cart-grid">
+                <!-- Cart Items Column -->
+                <div class="cart-items-column">
+                    <div id="cart-items-container" class="cart-items-list reveal">
+                        <!-- Items injected via JS -->
+                    </div>
+                    
+                    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;" class="reveal">
+                        <a href="grocery.html" class="btn btn-outline">
+                            <i class="fa-solid fa-arrow-left"></i> Continue Shopping
+                        </a>
+                        <button class="btn btn-outline" style="color: #ff6b6b; border-color: #ffc9c9;" onclick="clearCart()">
+                            <i class="fa-solid fa-trash-can"></i> Clear Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Column -->
+                <div class="cart-summary-column reveal">
+                    <div class="order-summary-card">
+                        <h2 class="summary-title">Order Summary</h2>
+                        <div class="summary-details">
+                            <div class="summary-line">
+                                <span>Subtotal</span>
+                                <span id="cart-subtotal">₹0.00</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Delivery Fee</span>
+                                <span style="color: #22c55e;">FREE</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Tax (GST)</span>
+                                <span>₹0.00</span>
+                            </div>
+                            <div class="summary-line total">
+                                <span>Total</span>
+                                <span id="cart-total">₹0.00</span>
+                            </div>
+                        </div>
+                        <a href="checkout.html" class="checkout-btn">
+                            Checkout Now <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+                        </a>
+                        <p style="text-align: center; font-size: 0.75rem; color: var(--text-light); margin-top: 15px;">
+                            <i class="fa-solid fa-shield-halved"></i> Secure 256-bit SSL encrypted payment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishlist Header -->
+    <div class="section-padding" style="background: var(--light-orange); padding: 60px 0;">
+        <div class="container text-center">
+            <h2 class="heading-primary">Your Wishlist</h2>
+        </div>
+    </div>
+
+    <!-- Wishlist Grid -->
+    <section class="section-padding">
+        <div class="container">
+            <div id="wishlist-grid" class="wishlist-container">
+                <!-- Items will be injected here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4><a href="index.html" class="logo">VM Traders</a></h4>
+                    <p>Your one-stop destination for premium products and exceptional service. Shop smart, trade better.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="grocery.html">Grocery</a></li>
+                        
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="grocery.html">Dairy Products</a></li>
+                        <li><a href="grocery.html">Packaged Staples</a></li>
+                        <li><a href="grocery.html">Snacks & Packaged Foods</a></li>
+                        <li><a href="grocery.html">Beverages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-envelope"></i> support@vmtraders.com</li>
+                        <li><i class="fa-solid fa-phone"></i> +1 234 567 890</li>
+                        <li><i class="fa-solid fa-location-dot"></i> 456 Business Blvd, Commerce Hub</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 VM Traders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+    <script>
+        if (!localStorage.getItem('currentUser')) {
+            alert('Please login to access your cart.');
+            window.location.href = 'login.html';
+        }
+    </script>
+    
+</body>
+
+</html>
+
+
+
+

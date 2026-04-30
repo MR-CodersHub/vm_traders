@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Services</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/icons.js"></script>
+    <style>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-orange);
+            color: var(--dark-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 20px;
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+
+        .service-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    VM Traders
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="grocery.html">Grocery</a></li>
+                    
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                </ul>
+                <div class="nav-icons">
+                        
+                    <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+                    
+                    <div class="user-dropdown-container">
+                        <button class="user-dropdown-toggle"><i class="fa-solid fa-user"></i></button>
+                        <div class="user-dropdown-menu">
+                            <a href="login.html" class="user-dropdown-item">Login / Sign Up</a>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="admin-dashboard.html" class="user-dropdown-item">Admin Dashboard</a>
+                            <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="section-padding reveal" style="background: var(--light-orange); padding: 60px 0;">
+        <div class="container text-center reveal">
+            <h1 class="heading-primary">Our Services</h1>
+            <p class="subtext">Comprehensive solutions for a seamless ecommerce experience</p>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <section class="section-padding reveal">
+        <div class="container">
+            <div class="services-grid reveal-stagger">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <h3>Online Product Sales</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Direct access to thousands of verified
+                        products with easy purchasing options.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h3>Secure Digital Payments</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Multiple encrypted payment gateways ensuring
+                        your financial safety.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+                    <h3>Order Management</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Advanced dashboard to track, modify, and view
+                        your order history easily.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                    <h3>Delivery & Logistics</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Fast and reliable shipping network covering
+                        nationwide locations.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Dedicated team available 24/7 to assist with
+                        any queries or issues.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-magic-wand"></i>
+                    </div>
+                    <h3>Product Recommendations</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">AI-driven suggestions to help you find
+                        exactly what you need.</p>
+                    <a href="service-details.html" class="service-link">Learn More <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4><a href="index.html" class="logo">VM Traders</a></h4>
+                    <p>Your one-stop destination for premium products and exceptional service. Shop smart, trade better.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="grocery.html">Grocery</a></li>
+                        
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="grocery.html">Dairy Products</a></li>
+                        <li><a href="grocery.html">Packaged Staples</a></li>
+                        <li><a href="grocery.html">Snacks & Packaged Foods</a></li>
+                        <li><a href="grocery.html">Beverages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-envelope"></i> support@vmtraders.com</li>
+                        <li><i class="fa-solid fa-phone"></i> +1 234 567 890</li>
+                        <li><i class="fa-solid fa-location-dot"></i> 456 Business Blvd, Commerce Hub</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 VM Traders. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>
+
+
+
+
+

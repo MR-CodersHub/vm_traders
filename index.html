@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Quality Products & Reliable Service</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/api.js"></script>
+
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        VM Traders
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="grocery.html">Grocery</a></li>
+
+                        <li><a href="about.html">About</a></li>
+                        <li class="admin-mobile-link"><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                    </ul>
+                    <div class="nav-icons">
+                        <div class="nav-actions-right">
+                            <a href="wishlist.html" class="wishlist-link-nav" title="Wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="wishlist-badge" id="nav-wishlist-badge">0</span>
+                            </a>
+
+                            <div class="user-dropdown-container">
+                                <button class="user-dropdown-toggle"><i class="fa-solid fa-user"></i></button>
+                                <div class="user-dropdown-menu">
+                                    <a href="#" class="user-dropdown-item" data-auth="login">Login / Sign Up</a>
+                                    <div class="user-dropdown-divider"></div>
+                                    <a href="admin-dashboard.html" class="user-dropdown-item">Admin Dashboard</a>
+                                    <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </header>
+        <!-- Top Search Section -->
+        <section class="top-search-section reveal">
+            <div class="container">
+                <div class="search-bar-container">
+                    <div class="search-bar-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="search-bar-input" placeholder="Search for products, groceries...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section class="hero reveal">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="reveal">Smart Shopping Starts Here</h1>
+                    <p class="reveal" style="transition-delay: 0.2s;">Experience quality and trust in every purchase.
+                    </p>
+                    <div class="hero-buttons reveal" style="transition-delay: 0.4s;">
+                        <a href="grocery.html" class="btn btn-primary">Shop Now</a>
+                        <a href="grocery.html" class="btn btn-outline">Explore Categories</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Offers & Promotions Section -->
+        <section class="offers-section reveal">
+            <div class="container">
+                <!-- Promotional Slider -->
+                <div class="offers-slider-container">
+                    <div class="offers-slider">
+                        <div class="offer-slide"
+                            style="background-image: url('assets/images/offers/dairy_banner.png');">
+                            <a href="grocery.html?category=Dairy Products" class="offer-link">
+                                <div class="offer-content">
+                                    <h3>Flat 20% Off</h3>
+                                    <p>on all Dairy Products</p>
+                                    <span class="btn-shop-offer">Shop Now</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="offer-slide"
+                            style="background-image: url('assets/images/offers/snacks_banner.png');">
+                            <a href="grocery.html?category=Snacks & Packaged Foods" class="offer-link">
+                                <div class="offer-content">
+                                    <h3>Buy 1 Get 1 FREE</h3>
+                                    <p>Tasty Snacks & Biscuits</p>
+                                    <span class="btn-shop-offer">Shop Now</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="offer-slide"
+                            style="background-image: url('assets/images/offers/fresh_banner.png');">
+                            <a href="grocery.html?category=Vegetables" class="offer-link">
+                                <div class="offer-content">
+                                    <h3>Up to 30% Off</h3>
+                                    <p>Fresh Fruits & Vegetables</p>
+                                    <span class="btn-shop-offer">Shop Now</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Deals Section -->
+                <div class="todays-deals-container">
+                    <div class="deals-header">
+                        <h3>Today's Deals</h3>
+                        <a href="grocery.html" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="deals-grid">
+                        <div class="deal-card">
+                            <div class="deal-badge">20%</div>
+                            <img src="assets/images/offers/milk_deal.png" alt="Fresh Milk">
+                            <div class="deal-info">
+                                <h4>Fresh Milk (1L)</h4>
+                                <div class="deal-pricing">
+                                    <span class="offer-price">₹40.00</span>
+                                    <span class="original-price">₹50.00</span>
+                                </div>
+                                <button class="add-cart-btn-small" data-id="g1" data-name="Fresh Milk" data-price="40"
+                                    data-image="assets/images/offers/milk_deal.png">Add</button>
+                            </div>
+                        </div>
+                        <div class="deal-card">
+                            <div class="deal-badge">16%</div>
+                            <img src="assets/images/offers/rice_deal.png" alt="Basmati Rice">
+                            <div class="deal-info">
+                                <h4>Basmati Rice (1kg)</h4>
+                                <div class="deal-pricing">
+                                    <span class="offer-price">₹250.00</span>
+                                    <span class="original-price">₹300.00</span>
+                                </div>
+                                <button class="add-cart-btn-small" data-id="g11" data-name="Basmati Rice"
+                                    data-price="250" data-image="assets/images/offers/rice_deal.png">Add</button>
+                            </div>
+                        </div>
+                        <div class="deal-card">
+                            <div class="deal-badge">20%</div>
+                            <img src="assets/images/offers/apples_deal.png" alt="Fresh Apples">
+                            <div class="deal-info">
+                                <h4>Fresh Apples (1kg)</h4>
+                                <div class="deal-pricing">
+                                    <span class="offer-price">₹120.00</span>
+                                    <span class="original-price">₹150.00</span>
+                                </div>
+                                <button class="add-cart-btn-small" data-id="v7" data-name="Fresh Apples"
+                                    data-price="120" data-image="assets/images/offers/apples_deal.png">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section reveal" style="position: relative; z-index: 100;">
+            <div class="container">
+                <div class="search-container-main"
+                    style="background: white; border-radius: 50px; box-shadow: var(--shadow-lg);">
+                    <i class="fa-solid fa-magnifying-glass search-icon-main" style="color: var(--primary-orange);"></i>
+                    <input type="text" id="homeSearchInput" class="search-input-main"
+                        placeholder="Search for fresh groceries, snacks, household items..."
+                        style="background: transparent; border: none; box-shadow: none;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal Categories Section -->
+        <section class="horizontal-categories reveal">
+            <div class="container">
+                <div class="categories-wrapper" id="homeCategories">
+                    <div class="category-pill active" data-category="All">
+                        <i class="fa-solid fa-shop"></i>
+                        <span>All Items</span>
+                    </div>
+                    <div class="category-pill" data-category="Dairy Products">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>Dairy</span>
+                    </div>
+                    <div class="category-pill" data-category="Packaged Staples">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Staples</span>
+                    </div>
+                    <div class="category-pill" data-category="Snacks & Packaged Foods">
+                        <i class="fa-solid fa-cookie"></i>
+                        <span>Snacks</span>
+                    </div>
+                    <div class="category-pill" data-category="Beverages">
+                        <i class="fa-solid fa-glass-cheers"></i>
+                        <span>Beverages</span>
+                    </div>
+                    <div class="category-pill" data-category="Household Essentials">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Household</span>
+                    </div>
+                    <div class="category-pill" data-category="Vegetables">
+                        <i class="fa-solid fa-leaf"></i>
+                        <span>Vegetables</span>
+                    </div>
+                    <div class="category-pill" data-category="Fruits">
+                        <i class="fa-solid fa-apple"></i>
+                        <span>Fruits</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Catalog Section (Replacing Trending Products) -->
+        <section class="section-padding reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="heading-primary" id="homeGridTitle">Fresh From Store</h2>
+                    <p class="subtext">Daily grocery essentials delivered safely to your home</p>
+                </div>
+                <!-- Dynamic Grid Target -->
+                <div id="homeProductsGrid" class="products-grid reveal-stagger"></div>
+            </div>
+        </section>
+        <!-- Why Choose Us -->
+        <section class="section-padding why-choose reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="heading-primary">Why Choose Us</h2>
+                    <p class="subtext">Simple shopping experience designed for speed, trust, and convenience.</p>
+                </div>
+                <div class="why-grid reveal-stagger">
+                    <div class="why-item">
+                        <i class="fa-solid fa-rocket"></i>
+                        <h3>Speed</h3>
+                        <p>Optimized for fast loading and quick checkout processes.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fa-solid fa-lock"></i>
+                        <h3>Trust</h3>
+                        <p>Transparent policies and verified secure payment systems.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <h3>Convenience</h3>
+                        <p>Easy navigation and user-friendly interface for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4><a href="index.html" class="logo">VM Traders</a></h4>
+                        <p>Your one-stop destination for premium products and exceptional service. Shop smart, trade
+                            better.
+                        </p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="grocery.html">Grocery</a></li>
+
+                            <li><a href="about.html">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="grocery.html">Dairy Products</a></li>
+                            <li><a href="grocery.html">Packaged Staples</a></li>
+                            <li><a href="grocery.html">Snacks & Packaged Foods</a></li>
+                            <li><a href="grocery.html">Beverages</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-envelope"></i> support@vmtraders.com</li>
+                            <li><i class="fa-solid fa-phone"></i> +1 234 567 890</li>
+                            <li><i class="fa-solid fa-location-dot"></i> 456 Business Blvd, Commerce Hub</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2026 VM Traders. All Rights Reserved.</p>
+                </div>
+            </div> <!-- End of page-wrapper -->
+        </footer>
+    </div> <!-- Close page-wrapper -->
+
+
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script src="assets/js/home.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>

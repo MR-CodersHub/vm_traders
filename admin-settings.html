@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Admin Settings</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    
+    <script src="assets/js/icons.js"></script>
+    <script src="assets/js/api.js"></script>
+</head>
+
+<body class="dashboard-layout admin-dashboard">
+    <canvas id="bg-canvas"></canvas>
+    <div class="page-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="logo-text">
+                    <i class="fa-solid fa-bolt"></i> VM Traders
+                </a>
+            </div>
+
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-profile">
+                    <div class="sidebar-user-avatar">A</div>
+                    <div class="sidebar-user-details">
+                        <p class="sidebar-user-name">Admin User</p>
+                        <p class="sidebar-user-role">Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="admin-products.html"><i class="fa-solid fa-box"></i> Products</a></li>
+                <li><a href="admin-customers.html"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="admin-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+                <li><a href="admin-settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li class="logout-item"><a href="#" data-auth="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0;">
+            <!-- Header -->
+            <header>
+                <div class="navbar">
+                    <div class="header-left">
+                        <div class="sidebar-toggle"><i class="fa-solid fa-bars"></i></div>
+                        <h1 class="page-title" style="font-size: 1.25rem; font-weight: 700; margin-left: 15px; color: var(--text-main);">Settings</h1>
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <a href="index.html" class="nav-icon" title="View Site"><i class="fa-solid fa-globe"></i></a>
+                        <div class="user-dropdown-container">
+                            <button class="user-dropdown-toggle"><i class="fa-solid fa-circle-user"></i></button>
+                            <div class="user-dropdown-menu">
+                                <a href="#" class="user-dropdown-item" data-auth="login">Login / Sign Up</a>
+                                <div class="user-dropdown-divider"></div>
+                                <a href="admin-dashboard.html" class="user-dropdown-item">Dashboard Overview</a>
+                                <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-container">
+                <div class="admin-header">
+                    <h2>System Preferences</h2>
+                    <p>Configure your store details, notifications, and regional settings.</p>
+                </div>
+
+                <div class="main-content">
+                    <div class="settings-form">
+                        <div class="settings-section" style="margin-bottom: 40px;">
+                            <h3 style="margin-top: 0; margin-bottom: 20px; font-weight: 700;">General Store Settings</h3>
+                            <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                                <div class="input-group">
+                                    <label>Store Name</label>
+                                    <input type="text" class="admin-input" value="VM Traders">
+                                </div>
+                                <div class="input-group">
+                                    <label>Support Email</label>
+                                    <input type="email" class="admin-input" value="support@vmtraders.com">
+                                </div>
+                                <div class="input-group">
+                                    <label>Store Currency</label>
+                                    <select class="admin-input">
+                                        <option value="INR" selected>INR (₹)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-section" style="margin-bottom: 40px; padding: 24px; background: #f8fafc; border-radius: 16px; border: 1px solid var(--border);">
+                            <h3 style="margin-top: 0; margin-bottom: 20px; font-weight: 700;">Notifications & Alerts</h3>
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <p style="font-weight: 600; margin: 0;">Order Confirmation Emails</p>
+                                        <small style="color: var(--text-muted);">Send automated emails to customers upon purchase.</small>
+                                    </div>
+                                    <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary);">
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <p style="font-weight: 600; margin: 0;">Low Stock Alerts</p>
+                                        <small style="color: var(--text-muted);">Notify administrators when product stock falls below 10.</small>
+                                    </div>
+                                    <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary);">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="padding: 12px 32px;">
+                            <i class="fa-solid fa-floppy-disk"></i> Save System Settings
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: auto; background: white;">
+                <p>&copy; 2026 VM Traders. Admin Control Panel. Crafted for excellence.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>

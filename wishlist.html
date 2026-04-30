@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Wishlist</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="assets/js/icons.js"></script>
+    <style>
+        /* ---- Dashboard page scoped styles ---- */
+
+        /* Dashboard body background */
+        .dashboard-container {
+            padding: 40px 0;
+            background-color: var(--light-orange);
+            min-height: calc(100vh - 130px);
+        }
+
+        /* Two-column grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Sidebar — sticky */
+        .sidebar {
+            background: var(--white);
+            padding: 28px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 6px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 11px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: var(--light-orange);
+            color: var(--primary-orange);
+        }
+
+        /* Logout link */
+        .sidebar-menu .logout-link a {
+            color: #e74c3c;
+        }
+
+        .sidebar-menu .logout-link a:hover {
+            background-color: rgba(231, 76, 60, 0.08);
+            color: #c0392b;
+        }
+
+        /* Main content */
+        .main-content {
+            background: var(--white);
+            padding: 36px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Wishlist grid */
+        .wishlist-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-wishlist i {
+            font-size: 3rem;
+            color: var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .empty-wishlist p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* Responsive: stack on tablet/mobile */
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* sidebar position handled by global off-canvas CSS */
+        }
+    </style>
+    <script src="assets/js/api.js"></script>
+</head>
+
+<body class="dashboard-layout">
+    <canvas id="bg-canvas"></canvas>
+    <div class="page-wrapper">
+        <!-- Header: dashboard version — logo only + logout -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    
+                    <a href="index.html" class="logo">
+                        VM Traders
+                    </a>
+                    <!-- nav-links intentionally omitted on dashboard pages -->
+                    <div class="nav-icons">
+                        <div class="nav-actions-right">
+                            <div class="user-dropdown-container">
+                                <button class="user-dropdown-toggle"><i class="fa-solid fa-user"></i></button>
+                                <div class="user-dropdown-menu">
+                                    <a href="login.html" class="user-dropdown-item">Login / Sign Up</a>
+                                    <div class="user-dropdown-divider"></div>
+                                    <a href="admin-dashboard.html" class="user-dropdown-item">Admin Dashboard</a>
+                                    <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="dashboard-container">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <ul class="sidebar-menu">
+                            <li><a href="user-dashboard.html"><i class="fa-solid fa-house"></i> Overview</a></li>
+                            <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                            <li><a href="wishlist.html" class="active"><i class="fa-regular fa-heart"></i> Wishlist</a></li>
+                            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile Settings</a></li>
+                            <li class="logout-link"><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Content -->
+                    <section class="main-content">
+                        <div class="page-header">
+                            <h2>Your Wishlist</h2>
+                            <p style="color: var(--text-light);">Items you've saved for later.</p>
+                        </div>
+
+                        <div id="wishlist-grid" class="wishlist-container">
+                            <!-- Items injected by shop.js — shown when empty: -->
+                        </div>
+
+                        <!-- Empty state shown by JS when no items; fallback static -->
+                        <div id="wishlist-empty" class="empty-wishlist" style="display:none;">
+                            <i class="fa-regular fa-heart-break"></i>
+                            <p>Your wishlist is empty.</p>
+                            <a href="products.html" class="btn btn-outline">Browse Products</a>
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <a href="products.html" class="btn btn-outline">Continue Shopping</a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer style="background: var(--dark-orange); color: var(--white); padding: 40px 0; text-align: center;">
+            <div class="container">
+                <p>&copy; 2026 VM Traders. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>
+
+
+
+

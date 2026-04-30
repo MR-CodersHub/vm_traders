@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Product Management</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    
+    <script src="assets/js/icons.js"></script>
+</head>
+<body class="dashboard-layout admin-dashboard">
+    <canvas id="bg-canvas"></canvas>
+    <div class="page-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="logo-text">
+                    <i class="fa-solid fa-bolt"></i> VM Traders
+                </a>
+            </div>
+
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-profile">
+                    <div class="sidebar-user-avatar">A</div>
+                    <div class="sidebar-user-details">
+                        <p class="sidebar-user-name">Admin User</p>
+                        <p class="sidebar-user-role">Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="admin-products.html" class="active"><i class="fa-solid fa-box"></i> Products</a></li>
+                <li><a href="admin-customers.html"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="admin-orders.html"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+                <li><a href="admin-settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li class="logout-item"><a href="#" data-auth="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 0;">
+            <!-- Header -->
+            <header>
+                <div class="navbar">
+                    <div class="header-left">
+                        <div class="sidebar-toggle"><i class="fa-solid fa-bars"></i></div>
+                        <h1 class="page-title" style="font-size: 1.25rem; font-weight: 700; margin-left: 15px; color: var(--text-main);">Product Management</h1>
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <a href="index.html" class="nav-icon" title="View Site"><i class="fa-solid fa-globe"></i></a>
+                        <div class="user-dropdown-container">
+                            <button class="user-dropdown-toggle"><i class="fa-solid fa-circle-user"></i></button>
+                            <div class="user-dropdown-menu">
+                                <a href="#" class="user-dropdown-item" data-auth="login">Login / Sign Up</a>
+                                <div class="user-dropdown-divider"></div>
+                                <a href="admin-dashboard.html" class="user-dropdown-item">Dashboard Overview</a>
+                                <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-container">
+                <div class="admin-header">
+                    <h2>Inventory Management</h2>
+                    <p>Add, edit, and monitor your store's product availability.</p>
+                </div>
+                
+                <div class="main-content">
+                    <div class="admin-form-box">
+                        <h3 style="margin-top: 0; margin-bottom: 20px; font-weight: 700;">Add New Product</h3>
+                        <form id="addProductForm" class="form-grid">
+                            <div class="input-group">
+                                <label>Product Name</label>
+                                <input type="text" id="p-name" class="admin-input" placeholder="e.g. Basmati Rice" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Category</label>
+                                <select id="p-category" class="admin-input">
+                                    <option value="Dairy Products">Dairy Products</option>
+                                    <option value="Packaged Staples">Packaged Staples</option>
+                                    <option value="Snacks & Packaged Foods">Snacks & Packaged Foods</option>
+                                    <option value="Beverages">Beverages</option>
+                                    <option value="Household Essentials">Household Essentials</option>
+                                    <option value="Vegetables">Vegetables</option>
+                                    <option value="Fruits">Fruits</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Price (₹)</label>
+                                <input type="number" id="p-price" class="admin-input" placeholder="0.00" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Unit</label>
+                                <input type="text" id="p-unit" class="admin-input" placeholder="e.g. 1 kg" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Stock</label>
+                                <input type="number" id="p-stock" class="admin-input" value="100">
+                            </div>
+                            <div class="input-group">
+                                <label>Product Image</label>
+                                <input type="file" id="p-image" class="admin-input" accept="image/*" style="padding: 6px;">
+                            </div>
+                            <div id="imagePreviewContainer" style="display:none; align-items:center; gap:10px; grid-column: span 1;">
+                                <img id="imagePreview" src="" style="width:50px; height:50px; border-radius:8px; object-fit:cover; border:1px solid var(--border);">
+                                <span style="font-size:0.8rem; color:var(--text-muted);">Preview Ready</span>
+                            </div>
+                            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-plus"></i> Add Product to Inventory
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table" id="products-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Price (₹)</th>
+                                    <th>Unit</th>
+                                    <th>Stock</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="product-pagination" class="pagination-container" style="margin-top: 24px;"></div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: auto; background: white;">
+                <p>&copy; 2026 VM Traders. Admin Control Panel. Crafted for excellence.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+    <script src="assets/js/admin-dashboard-core.js"></script>
+</body>
+</html>

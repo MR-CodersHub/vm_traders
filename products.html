@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VM Traders | Products</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/icons.js"></script>
+    <style>
+        .filter-section {
+            padding: 30px 0;
+            background: var(--light-orange);
+            text-align: center;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-orange);
+            color: var(--white);
+            border-color: var(--primary-orange);
+        }
+
+        .products-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: var(--gray-bg);
+        }
+
+        .product-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 600px) {
+            .products-grid-full {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .product-card {
+                padding: 10px;
+                border-radius: 12px;
+            }
+            .product-card img {
+                height: 140px;
+            }
+            .product-card h3 {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    VM Traders
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="grocery.html">Grocery</a></li>
+                    
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                </ul>
+                <div class="nav-icons">
+                        
+                    <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+                    
+                    <div class="user-dropdown-container">
+                        <button class="user-dropdown-toggle"><i class="fa-solid fa-user"></i></button>
+                        <div class="user-dropdown-menu">
+                            <a href="login.html" class="user-dropdown-item">Login / Sign Up</a>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="admin-dashboard.html" class="user-dropdown-item">Admin Dashboard</a>
+                            <a href="user-dashboard.html" class="user-dropdown-item">User Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="section-padding reveal" style="padding: 60px 0; background: var(--white);">
+        <div class="container text-center reveal">
+            <h1 class="heading-primary">Our Current Collection</h1>
+            <p class="subtext">Explore premium products curated just for you.</p>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-section reveal">
+        <div class="container reveal-stagger">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Electronics</button>
+            <button class="filter-btn">Fashion</button>
+            <button class="filter-btn">Home Essentials</button>
+            <button class="filter-btn">Accessories</button>
+            <button class="filter-btn">Personal Care</button>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <section class="section-padding reveal">
+        <div class="container">
+            <div class="products-grid-full reveal-stagger">
+                <!-- Products will be dynamically rendered here by product-filter.js -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4><a href="index.html" class="logo">VM Traders</a></h4>
+                    <p>Your one-stop destination for premium products and exceptional service. Shop smart, trade better.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="grocery.html">Grocery</a></li>
+                        
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="grocery.html">Dairy Products</a></li>
+                        <li><a href="grocery.html">Packaged Staples</a></li>
+                        <li><a href="grocery.html">Snacks & Packaged Foods</a></li>
+                        <li><a href="grocery.html">Beverages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-envelope"></i> support@vmtraders.com</li>
+                        <li><i class="fa-solid fa-phone"></i> +1 234 567 890</li>
+                        <li><i class="fa-solid fa-location-dot"></i> 456 Business Blvd, Commerce Hub</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 VM Traders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/product-filter.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/background.js"></script>
+</body>
+
+</html>
+
+
+
+

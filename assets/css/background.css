@@ -1,0 +1,96 @@
+/* Premium Warm Environment - Optimized for modern E-commerce UX */
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -20;
+    pointer-events: none;
+    background: transparent;
+}
+
+body {
+    margin: 0;
+    /* Soft Vanilla to Warm Orange Gradient */
+    background: linear-gradient(135deg, #FFF9EB 0%, #FFF3E0 55%, #FFE0B2 100%);
+    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    color: var(--espresso);
+    overflow-x: hidden;
+}
+
+.page-wrapper {
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+/* Premium Component Styling Overrides */
+.main-content,
+.auth-card,
+.product-card,
+.admin-card {
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-orange) !important;
+    border-radius: 24px !important;
+    box-shadow: var(--shadow-sm) !important;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--primary-orange) !important;
+}
+
+/* Standardized Premium Dark Orange Header */
+header {
+    background: var(--dark-orange) !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(216, 67, 21, 0.15) !important;
+    z-index: 1000 !important;
+    height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.logo, 
+.logo i {
+    color: var(--white) !important;
+    font-weight: 800 !important;
+}
+
+.nav-links a {
+    color: var(--white) !important;
+    font-weight: 600 !important;
+    opacity: 0.9;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: var(--hover-orange) !important;
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.nav-icons a i, 
+.user-dropdown-toggle i {
+    color: var(--white) !important;
+    font-size: 1.4rem !important;
+    transition: var(--transition);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    header {
+        height: 65px !important;
+    }
+    
+    .logo {
+        font-size: 1.2rem !important;
+    }
+}
